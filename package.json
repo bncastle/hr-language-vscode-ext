@@ -1,0 +1,26 @@
+{
+    "name": "hr",
+    "displayName": "HR Language",
+    "description": "HR Language Extension",
+    "version": "0.0.1",
+    "publisher": "Pixelbyte-Studios",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "hr",
+            "aliases": ["HR", "hr"],
+            "extensions": [".hr"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "hr",
+            "scopeName": "source.hr",
+            "path": "./syntaxes/hr.tmLanguage.json"
+        }]
+    }
+}

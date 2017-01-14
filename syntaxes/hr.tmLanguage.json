@@ -1,0 +1,75 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "HR",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include" :"#comments"
+		},
+		{
+			"include" :"#braces"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.hr",
+				"match": "\\b(variables|tasks)\\b"
+			}
+			]
+		},
+		"strings": {
+			"patterns": [{
+				"name": "string.quoted.double.hr",
+				"begin": "\"",
+				"end": "\"",
+				"patterns": [
+					{
+						"name": "constant.character.escape.hr",
+						"match": "\\\\."
+					}
+				]},{
+				"name": "string.quoted.single.hr",
+				"begin": "'",
+				"end": "'",
+				"patterns": [
+					{
+						"name": "constant.character.escape.hr",
+						"match": "\\."
+					}
+				]}
+			]
+		},
+		"comments" : {
+			"patterns": [{
+				"name": "comment.line.number-sign.hr",
+				"match": "^(?:\\s)*#[^\n]*"
+			}]
+		},
+		"braces" :{
+			"patterns":[{
+				"name": "entity.name.section.hr",
+				"begin":"{",
+				"end" :"}",
+				"patterns": [
+					{
+					"match" : "^(?:\\s)*(\\w+)\\s*=\\s*([^\\n]+)",
+					"captures" : {
+						"1" : {"name" : "support.function.hr"},
+						"2" : {"name" : "variable.parameter.hr"}
+					}
+					},
+					{"include": "#strings"},
+					{"include": "#comments"}
+				]		
+			}
+			]
+		}
+	},
+	"scopeName": "source.hr"
+}
