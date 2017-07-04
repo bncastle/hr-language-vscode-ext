@@ -6,13 +6,10 @@
 			"include": "#keywords"
 		},
 		{
-			"include": "#strings"
-		},
-		{
 			"include" :"#comments"
 		},
 		{
-			"include" :"#braces"
+			"include" :"#sections"
 		}
 	],
 	"repository": {
@@ -51,11 +48,11 @@
 				"match": "^(?:\\s)*#[^\n]*"
 			}]
 		},
-		"braces" :{
+		"sections" :{
 			"patterns":[{
 				"name": "entity.name.section.hr",
-				"begin":"{",
-				"end" :"}",
+				"begin":"variables|tasks",
+				"end" :"variables|tasks",
 				"patterns": [
 					{
 					"match" : "^(?:\\s)*(\\w+)\\s*=\\s*([^\\n]+)",
@@ -64,8 +61,8 @@
 						"2" : {"name" : "variable.parameter.hr"}
 					}
 					},
-					{"include": "#strings"},
-					{"include": "#comments"}
+					{"include": "#comments"},
+					{"include": "#strings"}
 				]		
 			}
 			]
