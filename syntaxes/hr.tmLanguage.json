@@ -1,70 +1,105 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "HR",
+	"fileTypes": [
+		".hr"
+	],
 	"patterns": [
+		{
+			"include": "#comments"
+		},
 		{
 			"include": "#keywords"
 		},
 		{
-			"include" :"#comments"
-		},
-		{
-			"include" :"#sections"
+			"include": "#sections"
 		}
 	],
 	"repository": {
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.hr",
-				"match": "\\b(variables|tasks)\\b"
-			}
+			"patterns": [
+				{
+					"name": "keyword.control.hr",
+					"match": "^\\s*(variables|tasks)\\s*$"
+				}
 			]
 		},
 		"strings": {
-			"patterns": [{
-				"name": "string.quoted.double.hr",
-				"begin": "\"",
-				"end": "\"",
-				"patterns": [
-					{
-						"name": "constant.character.escape.hr",
-						"match": "\\\\."
-					}
-				]},{
-				"name": "string.quoted.single.hr",
-				"begin": "'",
-				"end": "'",
-				"patterns": [
-					{
-						"name": "constant.character.escape.hr",
-						"match": "\\."
-					}
-				]}
+			"patterns": [
+				{
+					"name": "string.quoted.double.hr",
+					"begin": "\"",
+					"end": "\"|\n",
+					"patterns": [
+						{
+							"name": "constant.character.escape.hr",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.hr",
+					"begin": "'",
+					"end": "'|\n",
+					"patterns": [
+						{
+							"name": "constant.character.escape.hr",
+							"match": "\\."
+						}
+					]
+				}
 			]
 		},
-		"comments" : {
-			"patterns": [{
-				"name": "comment.line.number-sign.hr",
-				"match": "^(?:\\s)*#[^\n]*"
-			}]
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.number-sign.hr",
+					"match": "^(?:\\s)*#[^\n]*"
+				}
+			]
 		},
-		"sections" :{
-			"patterns":[{
-				"name": "entity.name.section.hr",
-				"begin":"variables|tasks",
-				"end" :"variables|tasks",
-				"patterns": [
-					{
-					"match" : "^(?:\\s)*(\\w+)\\s*=\\s*([^\\n]+)",
-					"captures" : {
-						"1" : {"name" : "support.function.hr"},
-						"2" : {"name" : "variable.parameter.hr"}
-					}
-					},
-					{"include": "#comments"},
-					{"include": "#strings"}
-				]		
-			}
+		"variables" :{
+			"patterns": [
+				{
+					"name" :"variable.other.hr",
+					"match": "\\|@\\w+\\|"
+				}
+			]
+		},
+		"taskRef" : {
+			"patterns": [
+				{
+				"name":"variable.parameter.hr",
+				"match": ":\\w+"
+				}
+			]
+		},
+		"sections": {
+			"patterns": [
+				{
+					"name": "entity.name.section.hr",
+					"begin": "(?=^(?:\\s)*(?:\\w+))",
+					"end": "(?=tasks)|(?=variables)",
+					"patterns": [
+						{
+							"match": "^(?:\\s)*(\\w+)\\s*=\\s*([^$]+)",
+							"captures": {
+								"1": {
+									"name": "variable.parameter.hr"
+								},
+								"2": {
+									"name": "support.variable.hr"
+								}
+							}
+						},
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#strings"
+						}
+					]
+				}
 			]
 		}
 	},

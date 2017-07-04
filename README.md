@@ -1,5 +1,5 @@
 # README
-This extension enables VSCode syntax highlighting for Pixelbyte Studios' [HR](https://github.com/bncastle/HR) task runner language
+This extension enables VSCode syntax highlighting for Pixelbyte Studios' [HR](https://github.com/bncastle/HR) task runner language. For a reference to the tmLanguage, see [this](https://manual.macromates.com/en/regular_expressions)
 
 #Status: 
 This is a work in-progress.
