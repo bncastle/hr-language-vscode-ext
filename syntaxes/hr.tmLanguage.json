@@ -1,52 +1,22 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "HR",
-	"fileTypes": [
-		".hr"
-	],
+	"scopeName": "source.hr",
+	"fileTypes": [".hr"],
+	"foldingStartMarker": "^--\\w+",
+	"foldingStopMarker": "^$",
 	"patterns": [
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#sections"
-		}
+		{"include": "#comments"},
+		{"include": "#section_names"},
+		{"include": "#template"},
+		{"include": "#key_value"}
 	],
 	"repository": {
-		"keywords": {
+		"section_names": {
 			"patterns": [
 				{
 					"name": "keyword.control.hr",
-					"match": "^\\s*(variables|tasks)\\s*$"
-				}
-			]
-		},
-		"strings": {
-			"patterns": [
-				{
-					"name": "string.quoted.double.hr",
-					"begin": "\"",
-					"end": "\"|\n",
-					"patterns": [
-						{
-							"name": "constant.character.escape.hr",
-							"match": "\\\\."
-						}
-					]
-				},
-				{
-					"name": "string.quoted.single.hr",
-					"begin": "'",
-					"end": "'|\n",
-					"patterns": [
-						{
-							"name": "constant.character.escape.hr",
-							"match": "\\."
-						}
-					]
+					"match": "^--\\s*(variables|tasks|templates)\\s*$"
 				}
 			]
 		},
@@ -58,11 +28,11 @@
 				}
 			]
 		},
-		"variables" :{
+		"variableRef" :{
 			"patterns": [
 				{
 					"name" :"variable.other.hr",
-					"match": "\\|@\\w+\\|"
+					"match": "\\@\\w+\\"
 				}
 			]
 		},
@@ -74,34 +44,31 @@
 				}
 			]
 		},
-		"sections": {
+		"template" :{
 			"patterns": [
 				{
-					"name": "entity.name.section.hr",
-					"begin": "(?=^(?:\\s)*(?:\\w+))",
-					"end": "(?=tasks)|(?=variables)",
-					"patterns": [
-						{
-							"match": "^(?:\\s)*(\\w+)\\s*=\\s*([^$]+)",
-							"captures": {
-								"1": {
-									"name": "variable.parameter.hr"
-								},
-								"2": {
-									"name": "support.variable.hr"
-								}
-							}
-						},
-						{
-							"include": "#comments"
-						},
-						{
-							"include": "#strings"
-						}
-					]
+					"name" :"template.hr",
+					"match": "\\s*([a-zA-Z_]+)\\s*(\\()(.*?)(\\))\\s*=\\s*(.*)\\s*$",
+					"captures": {
+						"1":{"name":"storage.type.function"},
+						"2":{"name":"punctuation.parameters.begin.hr"},
+						"3":{"name":"variable.parameter.hr"},
+						"4":{"name":"punctuation.parameters.end.hr"},
+						"5":{"name":"support.function.hr"}
+					}
 				}
 			]
+		},
+		"key_value":{
+			"patterns": [
+				{
+					"match": "^\\s*(\\w+)\\s*=\\s*([^$]+)",
+					"captures": {
+						"1": {"name": "variable.parameter.hr"},
+						"2": {"name": "support.class.hr"}
+					}
+				}				
+			]
 		}
-	},
-	"scopeName": "source.hr"
+	}
 }
