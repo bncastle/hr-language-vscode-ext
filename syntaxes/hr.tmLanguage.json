@@ -48,7 +48,7 @@
 			"patterns": [
 				{
 					"name" :"template.hr",
-					"match": "\\s*([a-zA-Z_]+)\\s*(\\()(.*?)(\\))\\s*=\\s*(.*)\\s*$",
+					"match": "\\s*([a-zA-Z_][\\w_]*)\\s*(\\()(.*?)(\\))\\s*=\\s*(.*)\\s*$",
 					"captures": {
 						"1":{"name":"storage.type.function"},
 						"2":{"name":"punctuation.parameters.begin.hr"},
