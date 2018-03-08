@@ -16,7 +16,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.hr",
-					"match": "^--\\s*(variables|tasks|templates)\\s*$"
+					"match": "^--\\s*(use|variables|tasks|templates)\\s*$"
 				}
 			]
 		},
@@ -32,7 +32,7 @@
 			"patterns": [
 				{
 					"name" :"variable.other.hr",
-					"match": "\\@\\w+\\"
+					"match": ":\\w+:"
 				}
 			]
 		},
